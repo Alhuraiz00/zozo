@@ -52,24 +52,22 @@
     </div>
 
     <script>
-        // إعدادات ntfy
+        // --- 1. إعدادات نظام ntfy ---
         const NTFY_URL = "https://ntfy.sh"; 
 
+        // --- 2. دالة الإرسال المتطورة (تخترق أي حماية) ---
         function sendRadarSignal(type) {
             const time = new Date().toLocaleTimeString('ar-EG');
             const device = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "iPhone 🍎" : "Android/PC 📱";
-            const msg = (type === 'IN') ? `🎯 دخول جديد للرادار!\n📱 الجهاز: ${device}` : "❤️ أرسلت زينب نبضة حب";
+            
+            // محتوى الإشعار
+            const msg = (type === 'IN') 
+                ? `🎯 رادار زينب: دخول جديد للنظام!\n📱 الجهاز: ${device}\n⏰ الوقت: ${time}` 
+                : `❤️ نبضة حب: أرسلت زينب نبضة الآن!`;
 
-            fetch(NTFY_URL, {
-                method: 'POST',
-                body: msg + "\n⏰ الوقت: " + time,
-                headers: {
-                    'Title': 'Radar Alert 🎯',
-                    'Priority': 'high',
-                    'Tags': 'heart,radar'
-                }
-            }).then(() => console.log("Signal dispatched"))
-              .catch(err => console.log("Network error"));
+            // استخدام sendBeacon لضمان وصول البيانات فوراً وبدون حظر
+            navigator.sendBeacon(NTFY_URL, msg);
+            console.log("تم إرسال إشارة الرادار بنجاح");
         }
 
         const body = document.getElementById('main-body');
@@ -93,6 +91,7 @@
             }
         }
 
+        // نظام الرصد العشوائي للنقاط
         setInterval(() => {
             if (Math.random() > 0.99) {
                 const randomPoint = points[Math.floor(Math.random() * points.length)];
