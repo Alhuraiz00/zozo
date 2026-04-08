@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>رادار زينب الشامل ❤️</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d8d;
+            --accent: #ffcfdf;
+            --bg: #0a0508;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode {
+            --bg: #fff5f7;
+            --primary: #e91e63;
+            --accent: #331019;
+            --glass: rgba(255, 255, 255, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background: var(--bg);
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            transition: background 1.5s ease;
+            color: var(--accent);
+        }
+
+        #stars { position: fixed; inset: 0; pointer-events: none; opacity: 0.4; z-index: 1; }
+
+        .radar-box {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 77, 141, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 50px rgba(255, 77, 141, 0.15);
+            z-index: 5;
+        }
+
+        .sweep {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background: conic-gradient(from 0deg, transparent 70%, var(--primary));
+            top: 0; right: 0;
+            transform-origin: bottom left;
+            animation: rotate 4s linear infinite;
+            border-radius: 100% 0 0 0;
+            opacity: 0.4;
+        }
+
+        .radar-circle {
+            position: absolute;
+            border: 1px solid rgba(255, 77, 141, 0.15);
+            border-radius: 50%;
+        }
+
+        .heart-center {
+            position: relative;
+            z-index: 10;
+            font-size: 3.5rem;
+            cursor: pointer;
+            filter: drop-shadow(0 0 15px var(--primary));
+            animation: pulse 1.2s infinite;
+            user-select: none;
+        }
+
+        .memory-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--primary);
+            z-index: 5;
+            opacity: 0;
+            transition: transform 0.4s, opacity 0.4s;
+        }
+
+        .memory-point.active { opacity: 1; transform: scale(1.8); }
+
+        .info-card {
+            margin-top: 35px;
+            width: 85%;
+            max-width: 380px;
+            padding: 25px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            z-index: 10;
+        }
+
+        h2 { font-family: 'Amiri', serif; color: var(--primary); margin-bottom: 8px; }
+        #log-text { font-size: 1rem; line-height: 1.6; min-height: 50px; font-weight: bold; }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+        #gate {
+            position: fixed; inset: 0; background: #000; z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease;
+        }
+        .btn-start {
+            background: var(--primary); color: white; border: none;
+            padding: 18px 50px; border-radius: 35px; font-weight: 800; cursor: pointer;
+            font-size: 1.1rem; box-shadow: 0 10px 30px rgba(255, 77, 141, 0.4);
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <div id="gate">
+        <h2 style="color: white; margin-bottom: 25px;">نظام الرصد العاطفي لزينب</h2>
+        <button class="btn-start" onclick="unlock()">فتح الأنظمة 🔐</button>
+    </div>
+
+    <canvas id="stars"></canvas>
+
+    <div class="radar-box">
+        <div class="sweep"></div>
+        <div class="radar-circle" style="width: 100%; height: 100%;"></div>
+        <div class="radar-circle" style="width: 66%; height: 66%;"></div>
+        <div class="radar-circle" style="width: 33%; height: 33%;"></div>
+        
+        <div class="heart-center" onclick="manualPulse()">❤️</div>
+
+        <div class="memory-point" style="top: 20%; left: 75%;" data-msg="رصدت أول ضحكة لكِ هنا.. ترددها لا يزال في قلبي 🎶"></div>
+        <div class="memory-point" style="top: 55%; left: 10%;" data-msg="تحذير: منطقة شديدة العشق! يمنع المرور لغير زينب ⛔"></div>
+        <div class="memory-point" style="top: 80%; left: 45%;" data-msg="إشارة من المستقبل: أرى بيتنا الصغير يملؤه الحب 🏠"></div>
+    </div>
+
+    <div class="info-card">
+        <h2 id="status-title">جاري رصد الأشواق...</h2>
+        <p id="log-text">المسِ القلب لتنشيط الرادار</p>
+    </div>
+
+    <script>
+        // Telegram Config
+        const CONFIG = {
+            TOKEN: "8582048227:AAEshpmtnzN68mtuVfhTT-PiTbDQO-KKZ-A",
+            CHAT_ID: "166655986"
+        };
+
+        async function sendAlert(type) {
+            const device = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "iPhone 🍎" : "Android/PC 📱";
+            const time = new Date().toLocaleTimeString('ar-EG');
+            
+            let text = "";
+            if(type === 'IN') {
+                text = `🎯 *رادار زينب:* تم فتح النظام الآن!\n📱 الجهاز: ${device}\n⏰ الوقت: ${time}`;
+            } else {
+                text = `❤️ *نبضة حب:* زينب ضغطت على القلب الآن!`;
+            }
+
+            const url = `https://telegram.org{CONFIG.TOKEN}/sendMessage?chat_id=${CONFIG.CHAT_ID}&text=${encodeURIComponent(text)}&parse_mode=Markdown`;
+            try { fetch(url); } catch(e) {}
+        }
+
+        const body = document.getElementById('main-body');
+        const logText = document.getElementById('log-text');
+        const points = document.querySelectorAll('.memory-point');
+
+        function unlock() {
+            sendAlert('IN');
+            document.getElementById('gate').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('gate').remove();
+                applyTheme();
+            }, 600);
+        }
+
+        function applyTheme() {
+            const hour = new Date().getHours();
+            if (hour >= 6 && hour < 18) {
+                body.classList.add('light-mode');
+                document.getElementById('status-title').innerText = "صباح الخير لقلب زينب ☀️";
+            } else {
+                initStars();
+                document.getElementById('status-title').innerText = "رصد ليلي: نجوم زينب تضيء 🌙";
+            }
+        }
+
+        // Random Radar Detection
+        setInterval(() => {
+            if (Math.random() > 0.99) {
+                const randomPoint = points[Math.floor(Math.random() * points.length)];
+                activatePoint(randomPoint);
+            }
+        }, 1000);
+
+        function activatePoint(p) {
+            p.classList.add('active');
+            logText.innerText = p.getAttribute('data-msg');
+            setTimeout(() => p.classList.remove('active'), 4000);
+        }
+
+        function manualPulse() {
+            sendAlert('PULSE');
+            logText.innerText = "تم إرسال نبضة حب فورية لـ علاء 🚀❤️";
+            if(window.navigator.vibrate) window.navigator.vibrate([100, 50, 100]);
+            
+            const heart = document.querySelector('.heart-center');
+            heart.style.animation = 'none';
+            heart.offsetHeight; 
+            heart.style.animation = 'pulse 0.3s 3';
+            setTimeout(() => heart.style.animation = 'pulse 1.2s infinite', 1000);
+        }
+
+        function initStars() {
+            const canvas = document.getElementById('stars');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            for(let i=0; i<120; i++) {
+                ctx.fillStyle = "#fff";
+                ctx.beginPath();
+                ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, Math.random()*1.5, 0, Math.PI*2);
+                ctx.fill();
+            }
+        }
+    </script>
+</body>
+</html>
