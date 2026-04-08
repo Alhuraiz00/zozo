@@ -3,79 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>عالم ZOZO </title>
-    
+    <title>عالم ZOZO الخاص</title>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
-    
     <style>
         :root { --bg: #fff5f7; --card: rgba(255, 255, 255, 0.85); --accent: #e91e63; --text: #331019; --blur: blur(25px); }
         [data-theme="dark"] { --bg: #0d0407; --card: rgba(30, 10, 15, 0.85); --text: #ffebee; --accent: #ff4081; }
-        
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            background-color: var(--bg); 
-            font-family: 'Tajawal', -apple-system, sans-serif; 
-            height: 100vh; display: flex; flex-direction: column; 
-            justify-content: flex-end; overflow: hidden; transition: 1s ease; 
-        }
-
-        /* نافذة الترحيب لفتح الصوت في آيفون */
-        #welcome-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            display: flex; justify-content: center; align-items: center; z-index: 3000;
-        }
-        .welcome-box {
-            background: var(--card); width: 85%; max-width: 320px;
-            padding: 35px 25px; border-radius: 35px; text-align: center;
-        }
-        .welcome-box h2 { font-family: 'Amiri', serif; color: var(--accent); margin-bottom: 10px; }
-        .welcome-box p { font-size: 0.95rem; color: var(--text); line-height: 1.6; margin-bottom: 25px; }
-        .welcome-btn { 
-            background: var(--accent); color: white; border: none; 
-            padding: 16px 40px; border-radius: 20px; font-weight: 800; cursor: pointer;
-        }
-
-        .main-sheet { 
-            position: relative; z-index: 10; background: var(--card); 
-            backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); 
-            border-radius: 40px 40px 0 0; border: 1px solid rgba(255, 255, 255, 0.2); 
-            padding: 30px 24px calc(40px + env(safe-area-inset-bottom)); 
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.1); width: 100%; max-width: 430px; margin: 0 auto; 
-        }
+        body { background-color: var(--bg); font-family: 'Tajawal', -apple-system, sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; transition: 1s ease; }
+        .main-sheet { position: relative; z-index: 10; background: var(--card); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-radius: 40px 40px 0 0; border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 24px calc(35px + env(safe-area-inset-bottom)); box-shadow: 0 -10px 40px rgba(0,0,0,0.1); width: 100%; max-width: 430px; margin: 0 auto; }
         .zozo-header { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 1.4rem; display: block; text-align: center; margin-bottom: 5px; }
         h1 { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--text); text-align: center; margin-bottom: 20px; font-weight: 800; }
         .message-box { min-height: 160px; display: flex; align-items: center; justify-content: center; text-align: center; }
         #love-msg { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 1.7; color: var(--text); font-style: italic; }
-        
-        .btn-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-        .btn { border: none; padding: 18px; border-radius: 22px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
-        .primary { background: var(--accent); color: white; }
-        .secondary { background: rgba(37, 211, 102, 0.1); color: #128c7e; }
-
+        .btn-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .btn { border: none; padding: 18px; border-radius: 20px; font-size: 1.05rem; font-weight: 700; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
+        .btn:active { transform: scale(0.96); opacity: 0.8; }
+        .primary { background: var(--accent); color: white; box-shadow: 0 8px 25px rgba(233, 30, 99, 0.25); }
+        .secondary { background: rgba(142, 142, 147, 0.1); color: var(--accent); font-size: 0.95rem; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
         .stat-card { background: rgba(233, 30, 99, 0.05); padding: 15px; border-radius: 20px; text-align: center; }
         .stat-label { font-size: 0.7rem; color: var(--text); opacity: 0.6; display: block; margin-bottom: 4px; font-weight: 800; }
         .stat-val { font-family: 'Amiri', serif; font-size: 1.05rem; color: var(--accent); font-weight: bold; }
-        .batta-footer { margin-top: 20px; text-align: center; font-family: 'Amiri', serif; font-size: 1.1rem; color: var(--text); opacity: 0.8; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 10px; }
+        .batta-footer { margin-top: 25px; text-align: center; font-family: 'Amiri', serif; font-size: 1.1rem; color: var(--text); opacity: 0.8; font-style: italic; border-top: 1px solid rgba(142, 142, 147, 0.1); padding-top: 15px; }
         .heart { position: absolute; pointer-events: none; animation: floatUp linear forwards; }
         @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 100% { transform: translateY(-20vh) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body id="ios-body">
 
-    <!-- نافذة الدخول لفتح الصوت -->
-    <div id="welcome-overlay">
-        <div class="welcome-box">
-            <h2>أهلاً حبيبتي زينب ❤️</h2>
-            <p>هذا الركن الهادئ صُنع بحب من أجلكِ وحدكِ يا زينب.. استمتعي بنبضات قلبي.<br><b>المحب: علاء</b></p>
-            <button class="welcome-btn" onclick="unlockAudio()">دخول إلى عالمي ✨</button>
-        </div>
-    </div>
-
-    <!-- مصدر موسيقى مباشر ومجرب على آيفون -->
-    <audio id="bg-music" loop playsinline preload="auto">
+    <audio id="bg-music" loop>
         <source src="https://www.soundhelix.com" type="audio/mpeg">
     </audio>
 
@@ -84,15 +40,19 @@
     <div class="main-sheet">
         <span class="zozo-header">To My Forever ZOZO</span>
         <h1 id="dynamic-greet">...</h1>
+
         <div class="message-box">
             <div id="love-msg">يتم استحضار نبضات الحنين...</div>
         </div>
+
         <div class="actions-area">
             <div class="btn-stack">
-                <button class="btn primary" onclick="handleHeartClick()">نبضة حب من قلبي &#10024;</button>
-                <a id="wa-link" href="#" class="btn secondary">Chat on WhatsApp &#128140;</a>
+                <button class="btn primary" onclick="handleInteraction()">نبضة حب من قلبي &#10024;</button>
+                <!-- الرابط المباشر بدون جافا سكريبت لضمان الاستجابة -->
+                <a id="wa-link" href="https://wa.me" class="btn secondary">أخبريه أنكِ تفكرين به &#128140;</a>
             </div>
         </div>
+
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-label">&#128141; عهد الخطوبة:</span>
@@ -103,6 +63,7 @@
                 <b id="wed-timer" class="stat-val">...</b>
             </div>
         </div>
+
         <div class="batta-footer">
             أنتِ دائماً في قلبي.. يا بطتي الجميلة &#128037;
         </div>
@@ -110,30 +71,22 @@
 
     <script>
         const u = { heart: "\u2764\ufe0f", spark: "\u2728", flower: "\ud83c\udf38", star: "\ud83c\udf1f" };
-        const audio = document.getElementById('bg-music');
-        let audioUnlocked = false;
-
-        // وظيفة فك قفل الصوت في آيفون
-        function unlockAudio() {
-            audio.play().then(() => {
-                audioUnlocked = true;
-            }).catch(e => {
-                console.log("Audio waiting for gesture");
-            });
-            document.getElementById('welcome-overlay').style.display = 'none';
-            generateMessage();
-        }
-
-        function handleHeartClick() {
-            if(!audioUnlocked) { audio.play(); audioUnlocked = true; }
-            generateMessage();
-        }
+        let isMusicPlaying = false;
 
         const dict = {
             s: [`يا زينبُ، يا طهر الندى في الفجرِ، ${u.flower}`, `يا ZOZO، يا شمساً تضيءُ صدري، ${u.spark}`, `يا نبض قلبي، يا ملاذ صبري، ${u.heart}`, `يا روح روحي، يا اكتمال قدري، ${u.star}`],
             m: ["أنتِ السكينةُ حين يشتدُّ الضيقُ،", "أنتِ الملاذُ إذا ضلَّ الطريقُ،", "أنتِ الأمانُ والعهدُ الوثيقُ،", "أنتِ الحياةُ والنبضُ الرقيقُ،"],
             e: ["ففيكِ وجدتُ من الدنيا الأمانا.", "وحبُّكِ في حنايا الروحِ صانا.", "فطبتِ لقلبي سكَناً ومكانا.", "وزدتِ بقلبي قدراً وشأنا."]
         };
+
+        function handleInteraction() {
+            const music = document.getElementById('bg-music');
+            if (!isMusicPlaying) {
+                music.play().catch(e => console.log("Safari auto-play restriction handled"));
+                isMusicPlaying = true;
+            }
+            generateMessage();
+        }
 
         function generateMessage() {
             const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -144,7 +97,7 @@
 
         function spawnHearts() {
             const container = document.getElementById('heart-container');
-            for(let i=0; i<6; i++) {
+            for(let i=0; i<8; i++) {
                 const h = document.createElement('div');
                 h.className = 'heart'; h.innerHTML = u.heart;
                 h.style.left = Math.random() * 100 + 'vw';
@@ -157,18 +110,23 @@
 
         function init() {
             const hour = new Date().getHours();
-            if (hour >= 18 || hour < 6) document.getElementById('ios-body').setAttribute('data-theme', 'dark');
+            const body = document.getElementById('ios-body');
+            if (hour >= 18 || hour < 6) body.setAttribute('data-theme', 'dark');
             
             let timeStr = "";
             if (hour < 12) timeStr = "صباح الحب لزينب " + u.spark;
             else if (hour < 18) timeStr = "نهاري أحلى بوجودك يا ZOZO " + u.flower;
             else timeStr = "ليلة هانئة يا حبيبتي " + u.star;
+                            
             document.getElementById('dynamic-greet').innerHTML = timeStr;
 
-            const waMsg = encodeURIComponent("يا أغلى إنسان علاء، اشتقت إليك.. أحبك " + u.heart);
-            document.getElementById('wa-link').href = "https://wa.me" + waMsg;
+            // تحديث رسالة الواتساب بالصيغة الدولية المختصرة
+            const waLink = document.getElementById('wa-link');
+            const waMsg = encodeURIComponent("يا أغلى إنسان، فكرت فيك الآن واشتقت إليك.. أحبك يا بطلي " + u.heart);
+            waLink.href = "https://wa.me?text=" + waMsg;
 
             updateCounters();
+            generateMessage();
         }
 
         function updateCounters() {
