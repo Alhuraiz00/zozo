@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عالم زينب — علاء</title>
+<title>عالم زينب في قلب علاء</title>
 <link href="https://googleapis.com" rel="stylesheet">
 <style>
 :root{ --rose:#e91e63; --night1:#0b0f2b; --night2:#1a0933; }
@@ -79,7 +79,7 @@ button{ border:none; border-radius:50px; padding:16px; font-weight:bold; color:w
 
 <script>
 // --- الإعدادات ---
-const SECRET_CODE = "1234"; // الرقم السري هنا
+const SECRET_CODE = "1989"; // الرقم السري هنا
 let messageIndex = Math.floor(Math.random() * 500);
 
 const part1 = ["زينب،", "يا أميرتي،", "في كل يوم،", "بكل نبضة،", "يا حلمي،", "يا رفيقة دربي،", "أنتِ الضياء،", "في قلبي مكانكِ،", "يا عمري الجميل،", "يا كلي،"];
@@ -93,7 +93,7 @@ function unlock() {
         document.getElementById("music").play().catch(()=>{});
         setTimeout(()=> document.getElementById("lockScreen").style.display="none", 1000);
     } else {
-        document.getElementById("lockMsg").innerText = "الرمز غير صحيح 💗";
+        document.getElementById("lockMsg").innerText = "الرمز غير صحيح 💗 يابطه";
         document.getElementById("pinInput").value = "";
     }
 }
@@ -103,7 +103,7 @@ function nextLove() {
     const p1 = part1[messageIndex % part1.length];
     const p2 = part2[(messageIndex + 3) % part2.length];
     const p3 = part3[(messageIndex * 7) % part3.length];
-    document.getElementById("loveMessage").innerHTML = `<b>${p1}</b><br>${p2}<br><i>${p3}</i><br><small style="opacity:0.5; font-size:0.7rem">— علاء</small>`;
+    document.getElementById("loveMessage").innerHTML = `<b>${p1}</b><br>${p2}<br><i>${p3}</i><br><small style="opacity:0.5; font-size:0.7rem">💗علاء💗</small>`;
     document.getElementById("snd-heart").play().catch(()=>{});
 }
 
