@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>📖 كتاب الحب إلى زينب - متجاوب بالكامل 💖</title>
+    <title>📖 كتاب الحب 💖</title>
     <style>
         * {
             margin: 0;
@@ -11,7 +11,6 @@
             box-sizing: border-box;
         }
 
-        /* استخدام وحدات مرنة */
         :root {
             --book-width: min(1100px, 95vw);
             --book-height: clamp(450px, 70vh, 700px);
@@ -28,7 +27,6 @@
             align-items: center;
             font-family: 'Segoe UI', 'Tahoma', 'Amiri', 'Traditional Arabic', serif;
             padding: clamp(10px, 3vw, 20px);
-            direction: rtl;
             transition: background 0.5s ease;
         }
 
@@ -54,7 +52,6 @@
             background: #1e293b;
         }
 
-        /* شاشة القفل المتجاوبة */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -117,7 +114,6 @@
             width: 100%;
         }
 
-        /* المحتوى الرئيسي */
         .main-content {
             display: none;
             width: 100%;
@@ -161,31 +157,32 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* في الكتاب العربي: الجهة اليمنى هي الصفحة الأولى */
         .page-right {
             right: 0;
-            transform-origin: left center;
+            transform-origin: right center;
             transform: rotateY(0deg);
             border-left: 1px solid #e0d6c0;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .page-left {
             left: 0;
-            transform-origin: right center;
+            transform-origin: left center;
             transform: rotateY(0deg);
             border-right: 1px solid #e0d6c0;
             background: #fef7e8;
         }
 
+        /* عند قلب الصفحة للكتاب العربي (الاتجاه معكوس) */
         .book.flipped .page-right {
-            transform: rotateY(-180deg);
-        }
-
-        .book.flipped .page-left {
             transform: rotateY(180deg);
         }
 
-        /* تحسين التمرير */
+        .book.flipped .page-left {
+            transform: rotateY(-180deg);
+        }
+
         .page::-webkit-scrollbar {
             width: 4px;
         }
@@ -232,7 +229,6 @@
             box-shadow: inset 0 0 5px #e0c8a8;
         }
 
-        /* شريط الأزرار العلوي - متجاوب */
         .top-bar {
             display: flex;
             justify-content: center;
@@ -260,7 +256,7 @@
             transition: 0.2s;
             font-family: inherit;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            min-height: 44px; /* لسهولة اللمس على الجوال */
+            min-height: 44px;
         }
 
         button:active {
@@ -277,28 +273,6 @@
             color: #b89a6e;
         }
 
-        /* إطار الصورة */
-        .photo-frame {
-            border: 2px dashed #d4af7a;
-            border-radius: 15px;
-            padding: 8px;
-            text-align: center;
-            margin: 10px 0;
-            background: #fdf5e6;
-        }
-        .photo-frame img {
-            max-width: 100%;
-            max-height: clamp(100px, 25vh, 150px);
-            border-radius: 12px;
-            object-fit: cover;
-        }
-        .photo-frame input {
-            margin-top: 8px;
-            font-size: clamp(0.7rem, 2.5vw, 0.8rem);
-            width: 100%;
-        }
-
-        /* الشموع */
         .candles {
             display: flex;
             justify-content: center;
@@ -327,7 +301,6 @@
             content: "🔥";
         }
 
-        /* باقة الورد */
         .bouquet {
             display: flex;
             flex-wrap: wrap;
@@ -341,7 +314,6 @@
             cursor: pointer;
         }
 
-        /* دفتر الملاحظات */
         .note-pad {
             background: #fff8e7;
             border-radius: 12px;
@@ -359,7 +331,70 @@
             resize: vertical;
         }
 
-        /* فقاعات الكلام */
+        .chat-container {
+            background: #fffef5;
+            border-radius: 20px;
+            padding: 12px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 60%;
+            overflow-y: auto;
+        }
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 10px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-left: 5px;
+        }
+        .message {
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 85%;
+            word-break: break-word;
+            font-size: 0.9rem;
+        }
+        .message.wife {
+            background: #d4af7a;
+            color: #2c1a0a;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .message.husband {
+            background: #8b5a2b;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 40px;
+            border: 1px solid #d4af7a;
+            font-family: inherit;
+            font-size: 0.85rem;
+            background: #fffef0;
+        }
+        .chat-input-area button {
+            padding: 8px 15px;
+            white-space: nowrap;
+        }
+        .chat-note {
+            font-size: 0.7rem;
+            color: #a57c4c;
+            text-align: center;
+            margin-top: 5px;
+        }
+
         .speech-bubble {
             position: fixed;
             background: white;
@@ -382,7 +417,6 @@
             }
         }
 
-        /* الكرة البلورية */
         .crystal-ball {
             background: radial-gradient(circle at 30% 30%, #a888c4, #4a2f6d);
             width: clamp(80px, 25vw, 120px);
@@ -403,7 +437,6 @@
             min-height: 60px;
         }
 
-        /* الزهور المتساقطة */
         .petal {
             position: fixed;
             top: -20px;
@@ -428,7 +461,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* تحسينات إضافية للجوال */
         @media (max-width: 768px) {
             .page {
                 padding: 15px 12px;
@@ -441,7 +473,6 @@
             }
         }
 
-        /* تحسين للشاشات الأفقية على الجوال */
         @media (max-width: 900px) and (orientation: landscape) {
             :root {
                 --book-height: 80vh;
@@ -449,12 +480,8 @@
             .page {
                 padding: 10px 12px;
             }
-            h1 {
-                margin-bottom: 8px;
-            }
         }
 
-        /* لأجهزة iPad الكبيرة */
         @media (min-width: 768px) and (max-width: 1024px) {
             :root {
                 --book-height: 65vh;
@@ -485,7 +512,6 @@
 </head>
 <body>
 
-<!-- شاشة القفل -->
 <div class="lock-screen" id="lockScreen">
     <div class="lock-card">
         <div class="lock-icon">🔒📖</div>
@@ -495,13 +521,10 @@
         <input type="password" id="secretCode" maxlength="4" placeholder="____" inputmode="numeric" pattern="[0-9]*">
         <button id="unlockBtn">🔓 فتح الكتاب</button>
         <div class="error-msg" id="errorMsg"></div>
-        <div class="hint">
-            💌 تلميح: سنة خاصة في قلب زوجك (4 أرقام)
-        </div>
+        <div class="hint">💌 تلميح: سنة خاصة في قلب زوجك (4 أرقام)</div>
     </div>
 </div>
 
-<!-- المحتوى الرئيسي -->
 <div class="main-content" id="mainContent">
 <div class="book-container">
     <div class="top-bar">
@@ -513,8 +536,8 @@
     </div>
 
     <div class="book" id="book">
-        <div class="page page-left" id="leftPage"></div>
         <div class="page page-right" id="rightPage"></div>
+        <div class="page page-left" id="leftPage"></div>
     </div>
 
     <div class="controls">
@@ -537,7 +560,7 @@
     const secretInput = document.getElementById('secretCode');
     const unlockBtn = document.getElementById('unlockBtn');
     const errorMsg = document.getElementById('errorMsg');
-    
+   
     function unlockBook() {
         if (secretInput.value === SECRET_CODE) {
             lockScreen.style.opacity = '0';
@@ -560,49 +583,94 @@
             secretInput.value = '';
         }
     }
-    
+   
     unlockBtn.addEventListener('click', unlockBook);
     secretInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') unlockBook(); });
     secretInput.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4); });
-    
-    // باقي كود الكتاب
-    const book = document.getElementById('book');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
+   
+    // ------------------ محتوى الكتاب (تم إزالة الصور) ------------------
+    // المحتوى: كل عنصر يمثل صفحة واحدة. ترتيب الصفحات: 1،2،3،...
     const pagesContent = [
         `<div class="page-content"><div style="text-align:center; margin-top:15%;"><h1>زينب 🌹💖</h1><div class="poem">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا" 🤍</div><div class="greeting">إلى نور بيتي ✨ وبهجة عمري 😊<br>يا من تسكنين قلبي قبل بيتي 🏠❤️</div><div class="signature">♥ زوجك للأبد ♥</div></div><div class="page-number">📖 1</div></div>`,
         `<div class="page-content"><h1>✨ ذكرى لقائنا ✨</h1><div class="greeting">أتذكر أول مرة رأيتكِ فيها؟ 🌸 ابتسامتكِ أضاءت الطريق 💫 أيقنتُ أنني وجدت ما أبحث عنه 🥹💕</div><div class="poem">قالت الدنيا: "هذه زينب" 💃<br>فقلت: هذه جنتي 🌷</div><div class="greeting">أنتِ أغلى هدية 🎁✨</div><div class="page-number">📖 2</div></div>`,
         `<div class="page-content"><h1>💗 صفاتكِ 💗</h1><div class="greeting">أحب فيكِ حلمكِ وطموحكِ وحنانكِ 🌹 ضحكتكِ تداوي جراحي 😊</div><div class="poem">عيناكِ بحران عميقان 🌊 أغوص فيهما لأجد نفسي 🤍</div><div class="page-number">📖 3</div></div>`,
         `<div class="page-content"><h1>💕 حب لا يوصف 💕</h1><div class="greeting">لو كتبت بحور الدنيا حبراً 🌊 لن أستطيع وصف حبكِ 📖</div><div class="poem">زينب.. أنتِ معجزتي 🌟 ونبضي الذي لا يتوقف 💓</div><div class="greeting">أحبكِ حباً لو سئل عنه البحر لقال: لا يحيط به كلام 😊</div><div class="page-number">📖 4</div></div>`,
-        `<div class="page-content"><h1>📸 لحظات جميلة 📸</h1><div class="greeting">كل صباح معكِ ☕ وكل سهرة معكِ 🥰 أسعد أيامي هي التي أراكِ فيها سعيدة 😊</div><div class="photo-frame"><img id="uploadedImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0e4d0'/%3E%3Ctext x='20' y='55' fill='%238b5a2b' font-size='12'%3E📸 صورتك%3C/text%3E%3C/svg%3E" style="max-width:100%; border-radius:12px;"><br><input type="file" id="photoUpload" accept="image/*" style="margin-top:8px"></div><div class="page-number">📖 5</div></div>`,
-        `<div class="page-content"><h1>🙏 شكراً لكِ 🙏</h1><div class="greeting">شكراً لأنكِ رفيقة طريقي 🌹 شكراً لكل قهوة قدمتِها ☕</div><div class="poem">لو كان العمر أوراقاً 📄 لكنت أكتب اسمكِ في كل ورقة ✍️💕</div><div class="note-pad"><strong>📝 رسالة سريعة:</strong><br><textarea id="secretNote" rows="2" placeholder="اكتبي شيئاً... سيتم حفظه تلقائياً 💌"></textarea></div><div class="page-number">📖 6</div></div>`,
-        `<div class="page-content"><h1>🤲 دعائي لكِ 🤲</h1><div class="greeting">أسأل الله أن يحميكِ 🛡️ ويسعدكِ 🎉</div><div class="poem">اللهم إني أحببت زينب فيك 🤲 فاحفظها لي بحفظك 🤍</div><div class="candles" id="candlesArea"><div class="candle" data-lit="false"></div><div class="candle" data-lit="false"></div><div class="candle" data-lit="false"></div></div><div class="page-number">📖 7</div></div>`,
-        `<div class="page-content"><h1>💍 وعد لا ينتهي 💍</h1><div class="greeting">سأظل أحبكِ حتى آخر نفس 🌹</div><div class="bouquet" id="bouquetArea"></div><div><button id="addFlowerBtn">🌹 أضف وردة للباقة</button></div><div class="greeting" style="font-size:1.5rem; text-align:center;">💖🥀💖🥀💖</div><div class="page-number">📖 8 الخاتمة</div></div>`,
-        `<div class="page-content"><h1>🔮 كرة الحب السحرية 🔮</h1><div class="greeting">انقري على الكرة لتحصلي على رسالة حب عشوائية من قلب زوجك 💕</div><div class="crystal-ball" id="crystalBall">🔮</div><div class="fortune-text" id="fortuneText">✨ انتظري المفاجأة ✨</div><div class="greeting" style="margin-top:15px; text-align:center;">كل نقرة تحمل رسالة جديدة من قلبي لكِ ❤️</div><div class="page-number">📖 9 الكرة السحرية</div></div>`
+        `<div class="page-content"><h1>🙏 شكراً لكِ 🙏</h1><div class="greeting">شكراً لأنكِ رفيقة طريقي 🌹 شكراً لكل قهوة قدمتِها ☕</div><div class="poem">لو كان العمر أوراقاً 📄 لكنت أكتب اسمكِ في كل ورقة ✍️💕</div><div class="note-pad"><strong>📝 رسالة سريعة:</strong><br><textarea id="secretNote" rows="2" placeholder="اكتبي شيئاً... سيتم حفظه تلقائياً 💌"></textarea></div><div class="page-number">📖 5</div></div>`,
+        `<div class="page-content"><h1>🤲 دعائي لكِ 🤲</h1><div class="greeting">أسأل الله أن يحميكِ 🛡️ ويسعدكِ 🎉</div><div class="poem">اللهم إني أحببت زينب 🤲 فاحفظها لي بحفظك 🤍</div><div class="candles" id="candlesArea"><div class="candle" data-lit="false"></div><div class="candle" data-lit="false"></div><div class="candle" data-lit="false"></div></div><div class="page-number">📖 6</div></div>`,
+        `<div class="page-content"><h1>💍 وعد لا ينتهي 💍</h1><div class="greeting">سأظل أحبكِ حتى آخر نفس 🌹</div><div class="bouquet" id="bouquetArea"></div><div><button id="addFlowerBtn">🌹 أضف وردة للباقة</button></div><div class="greeting" style="font-size:1.5rem; text-align:center;">💖🥀💖🥀💖</div><div class="page-number">📖 7</div></div>`,
+        `<div class="page-content"><h1>🔮 كرة الحب السحرية 🔮</h1><div class="greeting">انقري على الكرة لتحصلي على رسالة حب عشوائية من قلب زوجك 💕</div><div class="crystal-ball" id="crystalBall">🔮</div><div class="fortune-text" id="fortuneText">✨ انتظري المفاجأة ✨</div><div class="greeting" style="margin-top:15px; text-align:center;">كل نقرة تحمل رسالة جديدة من قلبي لكِ ❤️</div><div class="page-number">📖 8 الكرة السحرية</div></div>`,
+        `<div class="page-content"><h1>💬 شات الحب المباشر 💬</h1>
+        <div class="greeting">هنا يمكنكِ كتابة رسائلك لي (زوجك) وتصلني مباشرة على واتساب، وأنا سأرد عليكِ هنا في الشات 🤍</div>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="wifeMessage" placeholder="📝 اكتبي رسالتك لزوجك..." autocomplete="off">
+                <button id="sendToWhatsAppBtn">📲 إرسال للواتساب</button>
+            </div>
+            <div class="chat-input-area" style="margin-top: 5px;">
+                <input type="text" id="husbandReply" placeholder="✍️ رد الزوج (اكتب هنا ليظهر لزينب)">
+                <button id="sendHusbandReplyBtn">💚 إرسال رد الزوج</button>
+            </div>
+            <div class="chat-note">💡 عندما ترسلين رسالة، سيتم فتح واتساب مع النص جاهزاً - اضغطي إرسال. وردود زوجك ستظهر لكِ فوراً.</div>
+        </div>
+        <div class="page-number">📖 9 شات الحب</div></div>`
     ];
 
-    let currentPage = 1;
-    const totalPairs = pagesContent.length / 2;
+    let currentPage = 1;  // currentPage يمثل رقم أول صفحة تظهر على اليمين (فردية)
+    const totalPairs = Math.ceil(pagesContent.length / 2); // عدد الأزواج (الصفحة اليمنى + اليسرى)
 
+    // في الكتاب العربي: الصفحة اليمنى (page-right) تأخذ المحتوى الفردي (1،3،5...)
+    // والصفحة اليسرى (page-left) تأخذ المحتوى الزوجي (2،4،6...)
     function updateBook() {
-        const leftIndex = (currentPage - 1) * 2;
-        const rightIndex = leftIndex + 1;
-        if (leftIndex >= 0 && leftIndex < pagesContent.length) document.getElementById('leftPage').innerHTML = pagesContent[leftIndex];
-        if (rightIndex >= 0 && rightIndex < pagesContent.length) document.getElementById('rightPage').innerHTML = pagesContent[rightIndex];
+        const rightIndex = (currentPage - 1) * 2;      // الصفحة الفردية (يمين)
+        const leftIndex = rightIndex + 1;               // الصفحة الزوجية (يسار)
+        
+        const rightContent = (rightIndex < pagesContent.length) ? pagesContent[rightIndex] : `<div class="page-content"><div class="greeting">✨ نهاية الكتاب ✨<br>شكراً لقراءتكِ 📖💕</div><div class="page-number">📖 نهاية</div></div>`;
+        const leftContent = (leftIndex < pagesContent.length) ? pagesContent[leftIndex] : `<div class="page-content"><div class="greeting">💖 للحب صفحات لا تنتهي 💖</div><div class="page-number">📖</div></div>`;
+        
+        document.getElementById('rightPage').innerHTML = rightContent;
+        document.getElementById('leftPage').innerHTML = leftContent;
+        
         book.classList.remove('flipped');
         reattachDynamicElements();
     }
 
+    // وظائف الشات + حفظ الرسائل (نفس السابق)
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+
+    function saveChatHistory() {
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    }
+
+    function renderChatMessages() {
+        const container = document.getElementById('chatMessages');
+        if (!container) return;
+        container.innerHTML = '';
+        chatHistory.forEach(msg => {
+            const div = document.createElement('div');
+            div.className = `message ${msg.sender === 'wife' ? 'wife' : 'husband'}`;
+            div.innerHTML = `<strong>${msg.sender === 'wife' ? '💬 زينب' : '❤️ زوجي'}:</strong> ${msg.text}`;
+            container.appendChild(div);
+        });
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function addMessage(sender, text) {
+        if (!text.trim()) return;
+        chatHistory.push({ sender, text, timestamp: Date.now() });
+        saveChatHistory();
+        renderChatMessages();
+    }
+
     function reattachDynamicElements() {
-        const photoInput = document.getElementById('photoUpload');
-        if (photoInput) photoInput.onchange = (e) => { if(e.target.files[0]) { const img = document.getElementById('uploadedImg'); img.src = URL.createObjectURL(e.target.files[0]); } };
-        
+        // الملاحظات
         const noteArea = document.getElementById('secretNote');
         if(noteArea) { noteArea.value = localStorage.getItem('zainabNote') || ''; noteArea.oninput = () => localStorage.setItem('zainabNote', noteArea.value); }
-        
+       
+        // الشموع
         document.querySelectorAll('.candle').forEach(c => { c.onclick = () => c.classList.toggle('lit'); });
-        
+       
+        // باقة الورد
         const bouquet = document.getElementById('bouquetArea');
         const addBtn = document.getElementById('addFlowerBtn');
         if(bouquet && addBtn) {
@@ -611,23 +679,76 @@
             renderBouquet();
             addBtn.onclick = () => { flowers.push('🌹'); localStorage.setItem('flowerBouquet', JSON.stringify(flowers)); renderBouquet(); };
         }
-        
+       
+        // الكرة السحرية
         const ball = document.getElementById('crystalBall');
         const fortuneDiv = document.getElementById('fortuneText');
         if(ball && fortuneDiv) {
             const fortunes = ["💖 زينب، أنتِ حب عمري كله 💖","🌹 كل يوم أكتشف سبباً جديداً لحبكِ 🌹","✨ وجودكِ في حياتي هو أعظم هدية ✨","😊 ابتسامتكِ تضيء عالمي كله 😊","💕 أحبكِ أكثر من الكلمات 💕","🌟 أنتِ نجمتي التي تهتدي بها 🌟","🌸 أنتِ ربيع عمري ودفء شتائي 🌸"];
             ball.onclick = () => { fortuneDiv.innerHTML = `✨ "${fortunes[Math.floor(Math.random() * fortunes.length)]}" ✨`; };
         }
+
+        // الشات
+        const wifeInput = document.getElementById('wifeMessage');
+        const sendToWhatsApp = document.getElementById('sendToWhatsAppBtn');
+        const husbandReplyInput = document.getElementById('husbandReply');
+        const sendHusbandReply = document.getElementById('sendHusbandReplyBtn');
+
+        if (sendToWhatsApp && wifeInput) {
+            sendToWhatsApp.onclick = () => {
+                const text = wifeInput.value.trim();
+                if (text === "") return;
+                addMessage('wife', text);
+                const encodedText = encodeURIComponent(`❤️ رسالة من زينب: ${text}`);
+                const whatsappUrl = `https://wa.me/966548842250?text=${encodedText}`;
+                window.open(whatsappUrl, '_blank');
+                wifeInput.value = '';
+            };
+        }
+
+        if (sendHusbandReply && husbandReplyInput) {
+            sendHusbandReply.onclick = () => {
+                const reply = husbandReplyInput.value.trim();
+                if (reply === "") return;
+                addMessage('husband', reply);
+                husbandReplyInput.value = '';
+            };
+        }
+        renderChatMessages();
     }
 
-    function nextPage() { if (currentPage < totalPairs) { book.classList.add('flipped'); setTimeout(() => { currentPage++; updateBook(); book.classList.remove('flipped'); }, 400); } }
-    function prevPage() { if (currentPage > 1) { book.classList.add('flipped'); setTimeout(() => { currentPage--; updateBook(); book.classList.remove('flipped'); }, 400); } }
+    // التنقل في الكتاب العربي: "التالي" يعني ننتقل إلى الصفحة التالية (اليمنى التالية)
+    // و "السابقة" نعود للصفحة السابقة
+    function nextPage() {
+        if (currentPage < totalPairs) {
+            book.classList.add('flipped');
+            setTimeout(() => {
+                currentPage++;
+                updateBook();
+                book.classList.remove('flipped');
+            }, 400);
+        }
+    }
+    
+    function prevPage() {
+        if (currentPage > 1) {
+            book.classList.add('flipped');
+            setTimeout(() => {
+                currentPage--;
+                updateBook();
+                book.classList.remove('flipped');
+            }, 400);
+        }
+    }
 
+    const book = document.getElementById('book');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     nextBtn.addEventListener('click', nextPage);
     prevBtn.addEventListener('click', prevPage);
     updateBook();
 
-    // فقاعات الكلام
+    // فقاعات الحب العشوائية
     setInterval(() => {
         const msgs = ["💕 أحبك زينب", "🌹 أنتي جميلة", "😊 ابتسامتك نور", "💖 أنتي حياتي", "✨ أفتقدك", "🌸 وجودك سعادة"];
         const bubble = document.createElement('div');
@@ -639,19 +760,22 @@
         setTimeout(() => bubble.remove(), 2800);
     }, 6000);
 
-    // باقي الأزرار
+    // الأزرار الإضافية
     const music = document.getElementById('bgMusic');
     let musicPlaying = false;
-    document.getElementById('musicToggleBtn').onclick = () => { if(musicPlaying) { music.pause(); musicToggleBtn.innerHTML = '🎵 تشغيل الموسيقى'; } else { music.play(); musicToggleBtn.innerHTML = '🔇 إيقاف'; } musicPlaying = !musicPlaying; };
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    musicToggleBtn.onclick = () => { if(musicPlaying) { music.pause(); musicToggleBtn.innerHTML = '🎵 تشغيل الموسيقى'; } else { music.play(); musicToggleBtn.innerHTML = '🔇 إيقاف'; } musicPlaying = !musicPlaying; };
     document.getElementById('surpriseBtn').onclick = () => alert('💌 مفاجأة! 💌\n\nزينب، أنتِ أجمل هدية في حياتي ❤️🌹');
     document.getElementById('startPetalsBtn').onclick = () => { for(let i=0;i<30;i++) { const p = document.createElement('div'); p.className = 'petal'; p.innerHTML = ['🌸','🌼','🌻','💖'][Math.floor(Math.random()*4)]; p.style.left = Math.random() * 100 + '%'; p.style.animationDuration = 3 + Math.random() * 4 + 's'; p.style.fontSize = 15 + Math.random() * 20 + 'px'; document.body.appendChild(p); setTimeout(() => p.remove(), 6000); } };
-    
+   
     let night = false;
-    document.getElementById('nightModeBtn').onclick = () => { document.body.classList.toggle('night-mode'); night = !night; nightModeBtn.innerHTML = night ? '☀️ النهاري' : '🌙 الليلي'; };
-    
+    const nightModeBtn = document.getElementById('nightModeBtn');
+    nightModeBtn.onclick = () => { document.body.classList.toggle('night-mode'); night = !night; nightModeBtn.innerHTML = night ? '☀️ النهاري' : '🌙 الليلي'; };
+   
     // تسجيل صوتي
     let mediaRecorder, chunks = [], recording = false;
-    document.getElementById('voiceRecordBtn').onclick = async () => {
+    const voiceRecordBtn = document.getElementById('voiceRecordBtn');
+    voiceRecordBtn.onclick = async () => {
         if(!recording) {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
