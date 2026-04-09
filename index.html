@@ -1,143 +1,156 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>عالم ZOZO الخاص</title>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <style>
-        :root { --bg: #fff5f7; --card: rgba(255, 255, 255, 0.85); --accent: #e91e63; --text: #331019; --blur: blur(25px); }
-        [data-theme="dark"] { --bg: #0d0407; --card: rgba(30, 10, 15, 0.85); --text: #ffebee; --accent: #ff4081; }
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); font-family: 'Tajawal', -apple-system, sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; transition: 1s ease; }
-        .main-sheet { position: relative; z-index: 10; background: var(--card); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-radius: 40px 40px 0 0; border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 24px calc(35px + env(safe-area-inset-bottom)); box-shadow: 0 -10px 40px rgba(0,0,0,0.1); width: 100%; max-width: 430px; margin: 0 auto; }
-        .zozo-header { font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 1.4rem; display: block; text-align: center; margin-bottom: 5px; }
-        h1 { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--text); text-align: center; margin-bottom: 20px; font-weight: 800; }
-        .message-box { min-height: 160px; display: flex; align-items: center; justify-content: center; text-align: center; }
-        #love-msg { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 1.7; color: var(--text); font-style: italic; }
-        .btn-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-        .btn { border: none; padding: 18px; border-radius: 20px; font-size: 1.05rem; font-weight: 700; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
-        .btn:active { transform: scale(0.96); opacity: 0.8; }
-        .primary { background: var(--accent); color: white; box-shadow: 0 8px 25px rgba(233, 30, 99, 0.25); }
-        .secondary { background: rgba(142, 142, 147, 0.1); color: var(--accent); font-size: 0.95rem; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
-        .stat-card { background: rgba(233, 30, 99, 0.05); padding: 15px; border-radius: 20px; text-align: center; }
-        .stat-label { font-size: 0.7rem; color: var(--text); opacity: 0.6; display: block; margin-bottom: 4px; font-weight: 800; }
-        .stat-val { font-family: 'Amiri', serif; font-size: 1.05rem; color: var(--accent); font-weight: bold; }
-        .batta-footer { margin-top: 25px; text-align: center; font-family: 'Amiri', serif; font-size: 1.1rem; color: var(--text); opacity: 0.8; font-style: italic; border-top: 1px solid rgba(142, 142, 147, 0.1); padding-top: 15px; }
-        .heart { position: absolute; pointer-events: none; animation: floatUp linear forwards; }
-        @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 100% { transform: translateY(-20vh) scale(1.5); opacity: 0; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالم زينب — علاء</title>
+<link href="https://googleapis.com" rel="stylesheet">
+<style>
+:root{ --rose:#e91e63; --night1:#0b0f2b; --night2:#1a0933; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Cairo', sans-serif; min-height:100vh;
+  background:linear-gradient(135deg,#fdecef,#f8bbd0);
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden; transition:2.5s ease;
+}
+body.night{ background:linear-gradient(180deg,var(--night1),var(--night2),#000); color:#ffeef4; }
+.blob {
+  position: fixed; width: 300px; height: 300px;
+  background: rgba(233, 30, 99, 0.1); filter: blur(70px);
+  border-radius: 50%; z-index: -1; animation: move 25s infinite alternate;
+}
+@keyframes move { from { transform: translate(-20%, -20%); } to { transform: translate(100vw, 100vh); } }
+.world{
+  width:92%; max-width:430px; padding:35px; border-radius:40px;
+  background:rgba(255,255,255,.95); text-align:center;
+  box-shadow:0 25px 60px rgba(233,30,99,.3);
+  position:relative; z-index:5; animation: heartBeat 5s infinite;
+}
+@keyframes heartBeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
+body.night .world{ background:rgba(18,10,36,.9); }
+h1{color:var(--rose); font-size:2rem; margin-bottom:10px}
+#loveMessage{ margin:25px 0; min-height:120px; line-height:1.8; font-size:1.15rem; color:#444; }
+body.night #loveMessage{ color: #eee; }
+.actions{display:flex; flex-direction:column; gap:12px}
+button{ border:none; border-radius:50px; padding:16px; font-weight:bold; color:white; cursor:pointer; transition:0.3s; }
+.btn-heart{background: linear-gradient(45deg, #e91e63, #ff6090);}
+.btn-whisper{background: linear-gradient(45deg, #9c27b0, #ba68c8);}
+.btn-music{background: linear-gradient(45deg, #03a9f4, #4fc3f7);}
+#moon{
+  position:fixed; top:25px; right:25px; width:80px; height:80px;
+  border-radius:50%; background:#fff4c6; cursor:pointer;
+  box-shadow:0 0 40px rgba(255,255,220,0.5); overflow:hidden; z-index:10;
+}
+#moonShadow{ position:absolute; inset:0; background:var(--night1); transform:translateX(100%); transition:2s; }
+#moonWhisper{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; transition:1s; font-family:'Amiri'; color:var(--rose); font-weight:bold; }
+.star{ position:fixed; background:white; border-radius:50%; z-index:0; animation:twinkle infinite alternate; }
+@keyframes twinkle{from{opacity:0.2}to{opacity:1}}
+.heart{ position:fixed; pointer-events:none; font-size:20px; animation:float 2.5s forwards; }
+@keyframes float{ 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--x),-250px);opacity:0} }
+#lockScreen{ position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(15px); display:flex; justify-content:center; align-items:center; z-index:9999; transition:1s; }
+.lockCard{ background:white; padding:40px 30px; border-radius:35px; text-align:center; width:300px; }
+#pinInput{ width:100%; padding:15px; font-size:1.8rem; text-align:center; border-radius:15px; border:2px solid #f48fb1; margin-bottom:20px; outline:none; letter-spacing:5px; }
+</style>
 </head>
-<body id="ios-body">
+<body>
+<div class="blob"></div>
+<div id="lockScreen">
+  <div class="lockCard">
+    <h2 style="color:var(--rose); margin-bottom:10px">عالم زينب</h2>
+    <p style="margin-bottom:20px; color:#666">أدخلي الرمز السري</p>
+    <input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
+    <button class="btn-heart" onclick="unlock()" style="width:100%">دخول ✨</button>
+    <div id="lockMsg" style="margin-top:15px; color:red; font-size:0.9rem"></div>
+  </div>
+</div>
+<div id="moon" onclick="toggleNight()"><div id="moonShadow"></div><div id="moonWhisper">أحبك</div></div>
+<div class="world">
+  <h1>عالم زينب</h1>
+  <div id="loveMessage"></div>
+  <div class="actions">
+    <button class="btn-heart" onclick="nextLove()">نبضة حب ✨</button>
+    <button class="btn-whisper" onclick="forceWhisper()">همسة القمر 🌙</button>
+    <button class="btn-music" onclick="toggleMusic()">موسيقى العالم 🎵</button>
+  </div>
+</div>
+<audio id="music" loop><source src="https://pixabay.com"></audio>
+<audio id="snd-heart" src="https://mixkit.co"></audio>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com" type="audio/mpeg">
-    </audio>
+<script>
+// --- الإعدادات ---
+const SECRET_CODE = "1234"; // الرقم السري هنا
+let messageIndex = Math.floor(Math.random() * 500);
 
-    <div id="heart-container"></div>
+const part1 = ["زينب،", "يا أميرتي،", "في كل يوم،", "بكل نبضة،", "يا حلمي،", "يا رفيقة دربي،", "أنتِ الضياء،", "في قلبي مكانكِ،", "يا عمري الجميل،", "يا كلي،"];
+const part2 = ["أنتِ الحياة،", "يزهر العالم بكِ،", "حبكِ كنز لا ينتهي،", "أجد فيكِ الأمان،", "وجودكِ هو النور،", "أنتِ سر سعادتي،", "لا معنى للأيام بدونكِ،", "نبضي ينطق باسمكِ،", "أنتِ المبتدأ والخبر،", "تكتمل أيامي معكِ،"];
+const part3 = ["دائماً وأبداً.", "يا أغلى البشر.", "لأجلكِ أنتِ فقط.", "مهما طال الزمان.", "بكل حب، علاء.", "أحبكِ جداً.", "يا زينب الروح.", "يا نصفي الآخر.", "والقمر يشهد.", "يا سكن القلب."];
 
-    <div class="main-sheet">
-        <span class="zozo-header">To My Forever ZOZO</span>
-        <h1 id="dynamic-greet">...</h1>
+function unlock() {
+    const val = document.getElementById("pinInput").value;
+    if(val === SECRET_CODE) {
+        document.getElementById("lockScreen").style.opacity = "0";
+        document.getElementById("music").play().catch(()=>{});
+        setTimeout(()=> document.getElementById("lockScreen").style.display="none", 1000);
+    } else {
+        document.getElementById("lockMsg").innerText = "الرمز غير صحيح 💗";
+        document.getElementById("pinInput").value = "";
+    }
+}
 
-        <div class="message-box">
-            <div id="love-msg">يتم استحضار نبضات الحنين...</div>
-        </div>
+function nextLove() {
+    messageIndex++;
+    const p1 = part1[messageIndex % part1.length];
+    const p2 = part2[(messageIndex + 3) % part2.length];
+    const p3 = part3[(messageIndex * 7) % part3.length];
+    document.getElementById("loveMessage").innerHTML = `<b>${p1}</b><br>${p2}<br><i>${p3}</i><br><small style="opacity:0.5; font-size:0.7rem">— علاء</small>`;
+    document.getElementById("snd-heart").play().catch(()=>{});
+}
 
-        <div class="actions-area">
-            <div class="btn-stack">
-                <button class="btn primary" onclick="handleInteraction()">نبضة حب من قلبي &#10024;</button>
-                <!-- الرابط المباشر بدون جافا سكريبت لضمان الاستجابة -->
-                <a id="wa-link" href="https://wa.me" class="btn secondary">أخبريه أنكِ تفكرين به &#128140;</a>
-            </div>
-        </div>
+function forceWhisper() {
+    const w = document.getElementById("moonWhisper");
+    const phrases = ["زينب هي الحياة", "أحبكِ للأبد", "يا نبض علاء", "يا قمر ليلي", "جميلة الجميلات"];
+    w.innerText = phrases[messageIndex % phrases.length];
+    w.style.opacity = "1";
+    setTimeout(()=> w.style.opacity="0", 4000);
+}
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <span class="stat-label">&#128141; عهد الخطوبة:</span>
-                <b id="eng-timer" class="stat-val">...</b>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">&#127968; ميثاق الزواج:</span>
-                <b id="wed-timer" class="stat-val">...</b>
-            </div>
-        </div>
+function toggleNight() {
+    document.body.classList.toggle("night");
+    if(document.body.classList.contains("night")) generateStars();
+}
 
-        <div class="batta-footer">
-            أنتِ دائماً في قلبي.. يا بطتي الجميلة &#128037;
-        </div>
-    </div>
+function generateStars() {
+    if(document.querySelector(".star")) return;
+    for(let i=0; i<60; i++) {
+        const s = document.createElement("div");
+        s.className = "star";
+        s.style.width = s.style.height = Math.random()*2+1+"px";
+        s.style.left = Math.random()*100+"vw";
+        s.style.top = Math.random()*100+"vh";
+        document.body.appendChild(s);
+    }
+}
 
-    <script>
-        const u = { heart: "\u2764\ufe0f", spark: "\u2728", flower: "\ud83c\udf38", star: "\ud83c\udf1f" };
-        let isMusicPlaying = false;
+function toggleMusic() {
+    const m = document.getElementById("music");
+    m.paused ? m.play() : m.pause();
+}
 
-        const dict = {
-            s: [`يا زينبُ، يا طهر الندى في الفجرِ، ${u.flower}`, `يا ZOZO، يا شمساً تضيءُ صدري، ${u.spark}`, `يا نبض قلبي، يا ملاذ صبري، ${u.heart}`, `يا روح روحي، يا اكتمال قدري، ${u.star}`],
-            m: ["أنتِ السكينةُ حين يشتدُّ الضيقُ،", "أنتِ الملاذُ إذا ضلَّ الطريقُ،", "أنتِ الأمانُ والعهدُ الوثيقُ،", "أنتِ الحياةُ والنبضُ الرقيقُ،"],
-            e: ["ففيكِ وجدتُ من الدنيا الأمانا.", "وحبُّكِ في حنايا الروحِ صانا.", "فطبتِ لقلبي سكَناً ومكانا.", "وزدتِ بقلبي قدراً وشأنا."]
-        };
-
-        function handleInteraction() {
-            const music = document.getElementById('bg-music');
-            if (!isMusicPlaying) {
-                music.play().catch(e => console.log("Safari auto-play restriction handled"));
-                isMusicPlaying = true;
-            }
-            generateMessage();
+document.addEventListener("click", e => {
+    if(document.getElementById("lockScreen").style.display === "none") {
+        for(let i=0; i<5; i++) {
+            const h = document.createElement("div");
+            h.className = "heart"; h.innerText = "❤️";
+            h.style.setProperty('--x', (Math.random()-0.5)*150+"px");
+            h.style.left = e.clientX+"px"; h.style.top = e.clientY+"px";
+            document.body.appendChild(h);
+            setTimeout(()=> h.remove(), 2500);
         }
+    }
+});
 
-        function generateMessage() {
-            const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const msg = `${pick(dict.s)}<br>${pick(dict.m)}<br>${pick(dict.e)}`;
-            document.getElementById('love-msg').innerHTML = msg;
-            spawnHearts();
-        }
-
-        function spawnHearts() {
-            const container = document.getElementById('heart-container');
-            for(let i=0; i<8; i++) {
-                const h = document.createElement('div');
-                h.className = 'heart'; h.innerHTML = u.heart;
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.fontSize = (Math.random()*20 + 15)+'px';
-                h.style.animationDuration = (Math.random()*3 + 3)+'s';
-                container.appendChild(h);
-                setTimeout(()=> h.remove(), 4000);
-            }
-        }
-
-        function init() {
-            const hour = new Date().getHours();
-            const body = document.getElementById('ios-body');
-            if (hour >= 18 || hour < 6) body.setAttribute('data-theme', 'dark');
-            
-            let timeStr = "";
-            if (hour < 12) timeStr = "صباح الحب لزينب " + u.spark;
-            else if (hour < 18) timeStr = "نهاري أحلى بوجودك يا ZOZO " + u.flower;
-            else timeStr = "ليلة هانئة يا حبيبتي " + u.star;
-                            
-            document.getElementById('dynamic-greet').innerHTML = timeStr;
-
-            // تحديث رسالة الواتساب بالصيغة الدولية المختصرة
-            const waLink = document.getElementById('wa-link');
-            const waMsg = encodeURIComponent("يا أغلى إنسان، فكرت فيك الآن واشتقت إليك.. أحبك يا بطلي " + u.heart);
-            waLink.href = "https://wa.me?text=" + waMsg;
-
-            updateCounters();
-            generateMessage();
-        }
-
-        function updateCounters() {
-            const now = new Date();
-            const eng = new Date("2007-08-16"), wed = new Date("2008-08-05");
-            const format = (date) => Math.floor((now - date)/(1000*60*60*24)).toLocaleString() + " يوم";
-            document.getElementById('eng-timer').innerText = format(eng);
-            document.getElementById('wed-timer').innerText = format(wed);
-        }
-
-        window.onload = init;
-    </script>
+nextLove();
+</script>
 </body>
 </html>
