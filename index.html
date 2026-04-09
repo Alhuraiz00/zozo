@@ -1,156 +1,671 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عالم زينب في قلب علاء</title>
-<link href="https://googleapis.com" rel="stylesheet">
-<style>
-:root{ --rose:#e91e63; --night1:#0b0f2b; --night2:#1a0933; }
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Cairo', sans-serif; min-height:100vh;
-  background:linear-gradient(135deg,#fdecef,#f8bbd0);
-  display:flex; justify-content:center; align-items:center;
-  overflow:hidden; transition:2.5s ease;
-}
-body.night{ background:linear-gradient(180deg,var(--night1),var(--night2),#000); color:#ffeef4; }
-.blob {
-  position: fixed; width: 300px; height: 300px;
-  background: rgba(233, 30, 99, 0.1); filter: blur(70px);
-  border-radius: 50%; z-index: -1; animation: move 25s infinite alternate;
-}
-@keyframes move { from { transform: translate(-20%, -20%); } to { transform: translate(100vw, 100vh); } }
-.world{
-  width:92%; max-width:430px; padding:35px; border-radius:40px;
-  background:rgba(255,255,255,.95); text-align:center;
-  box-shadow:0 25px 60px rgba(233,30,99,.3);
-  position:relative; z-index:5; animation: heartBeat 5s infinite;
-}
-@keyframes heartBeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
-body.night .world{ background:rgba(18,10,36,.9); }
-h1{color:var(--rose); font-size:2rem; margin-bottom:10px}
-#loveMessage{ margin:25px 0; min-height:120px; line-height:1.8; font-size:1.15rem; color:#444; }
-body.night #loveMessage{ color: #eee; }
-.actions{display:flex; flex-direction:column; gap:12px}
-button{ border:none; border-radius:50px; padding:16px; font-weight:bold; color:white; cursor:pointer; transition:0.3s; }
-.btn-heart{background: linear-gradient(45deg, #e91e63, #ff6090);}
-.btn-whisper{background: linear-gradient(45deg, #9c27b0, #ba68c8);}
-.btn-music{background: linear-gradient(45deg, #03a9f4, #4fc3f7);}
-#moon{
-  position:fixed; top:25px; right:25px; width:80px; height:80px;
-  border-radius:50%; background:#fff4c6; cursor:pointer;
-  box-shadow:0 0 40px rgba(255,255,220,0.5); overflow:hidden; z-index:10;
-}
-#moonShadow{ position:absolute; inset:0; background:var(--night1); transform:translateX(100%); transition:2s; }
-#moonWhisper{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; transition:1s; font-family:'Amiri'; color:var(--rose); font-weight:bold; }
-.star{ position:fixed; background:white; border-radius:50%; z-index:0; animation:twinkle infinite alternate; }
-@keyframes twinkle{from{opacity:0.2}to{opacity:1}}
-.heart{ position:fixed; pointer-events:none; font-size:20px; animation:float 2.5s forwards; }
-@keyframes float{ 0%{transform:translate(0,0);opacity:1} 100%{transform:translate(var(--x),-250px);opacity:0} }
-#lockScreen{ position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(15px); display:flex; justify-content:center; align-items:center; z-index:9999; transition:1s; }
-.lockCard{ background:white; padding:40px 30px; border-radius:35px; text-align:center; width:300px; }
-#pinInput{ width:100%; padding:15px; font-size:1.8rem; text-align:center; border-radius:15px; border:2px solid #f48fb1; margin-bottom:20px; outline:none; letter-spacing:5px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>📖 كتاب الحب إلى زينب - متجاوب بالكامل 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* استخدام وحدات مرنة */
+        :root {
+            --book-width: min(1100px, 95vw);
+            --book-height: clamp(450px, 70vh, 700px);
+            --font-size-base: clamp(0.85rem, 3vw, 1.1rem);
+            --font-size-title: clamp(1.4rem, 5vw, 2rem);
+            --padding-page: clamp(15px, 4vw, 35px);
+        }
+
+        body {
+            background: linear-gradient(145deg, #2c3e2f 0%, #1a2a1c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Tahoma', 'Amiri', 'Traditional Arabic', serif;
+            padding: clamp(10px, 3vw, 20px);
+            direction: rtl;
+            transition: background 0.5s ease;
+        }
+
+        body.night-mode {
+            background: linear-gradient(145deg, #0f172a 0%, #020617 100%);
+        }
+
+        body.night-mode .page {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        body.night-mode .page-left {
+            background: #0f172a;
+        }
+
+        body.night-mode .greeting,
+        body.night-mode .poem {
+            color: #cbd5e1;
+        }
+
+        body.night-mode .poem {
+            background: #1e293b;
+        }
+
+        /* شاشة القفل المتجاوبة */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        .lock-card {
+            background: #fff9ef;
+            border-radius: clamp(20px, 8vw, 40px);
+            padding: clamp(20px, 6vw, 40px) clamp(20px, 5vw, 35px);
+            text-align: center;
+            max-width: 400px;
+            width: 85%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid #d4af7a;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .lock-card h1 {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            color: #8b5a2b;
+        }
+
+        .lock-card .lock-icon {
+            font-size: clamp(2.5rem, 10vw, 4rem);
+            margin: 15px 0;
+        }
+
+        .lock-card input {
+            width: 100%;
+            padding: clamp(10px, 3vw, 14px);
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            text-align: center;
+            border: 2px solid #d4af7a;
+            border-radius: 60px;
+            background: #fffef5;
+            font-family: monospace;
+            letter-spacing: 5px;
+            margin: 15px 0;
+            outline: none;
+        }
+
+        .lock-card button {
+            background: #d4af7a;
+            border: none;
+            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 28px);
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            display: none;
+            width: 100%;
+        }
+
+        .main-content.visible {
+            display: block;
+        }
+
+        .book-container {
+            perspective: 2500px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: var(--book-height);
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        .page {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            background: #fff9ef;
+            background-image: radial-gradient(circle at 25% 40%, rgba(210, 180, 140, 0.05) 2%, transparent 2.5%);
+            background-size: 20px 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: var(--padding-page);
+            transition: all 0.8s ease;
+            backface-visibility: hidden;
+            border-radius: 4px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page-right {
+            right: 0;
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            border-left: 1px solid #e0d6c0;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-left {
+            left: 0;
+            transform-origin: right center;
+            transform: rotateY(0deg);
+            border-right: 1px solid #e0d6c0;
+            background: #fef7e8;
+        }
+
+        .book.flipped .page-right {
+            transform: rotateY(-180deg);
+        }
+
+        .book.flipped .page-left {
+            transform: rotateY(180deg);
+        }
+
+        /* تحسين التمرير */
+        .page::-webkit-scrollbar {
+            width: 4px;
+        }
+        .page::-webkit-scrollbar-track {
+            background: #f0e4d0;
+            border-radius: 4px;
+        }
+        .page::-webkit-scrollbar-thumb {
+            background: #c5a26b;
+            border-radius: 4px;
+        }
+
+        h1 {
+            font-size: var(--font-size-title);
+            color: #8b5a2b;
+            border-bottom: 2px solid #d4af7a;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-family: 'Amiri', serif;
+        }
+
+        .page-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .greeting {
+            font-size: var(--font-size-base);
+            color: #5a3e1b;
+            line-height: 1.7;
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        .poem {
+            font-size: var(--font-size-base);
+            font-style: italic;
+            color: #7a5a3a;
+            margin: 15px 0;
+            padding: clamp(10px, 3vw, 15px);
+            background: #faf0e1;
+            border-radius: clamp(15px, 5vw, 30px) clamp(5px, 2vw, 10px) clamp(15px, 5vw, 30px) clamp(5px, 2vw, 10px);
+            box-shadow: inset 0 0 5px #e0c8a8;
+        }
+
+        /* شريط الأزرار العلوي - متجاوب */
+        .top-bar {
+            display: flex;
+            justify-content: center;
+            gap: clamp(6px, 2vw, 12px);
+            margin-bottom: clamp(10px, 3vw, 15px);
+            flex-wrap: wrap;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 3vw, 25px);
+            margin-top: clamp(15px, 4vw, 20px);
+            flex-wrap: wrap;
+        }
+
+        button, .action-btn {
+            background: #d4af7a;
+            border: none;
+            padding: clamp(6px, 2vw, 10px) clamp(12px, 4vw, 20px);
+            font-size: clamp(0.75rem, 2.8vw, 0.95rem);
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            min-height: 44px; /* لسهولة اللمس على الجوال */
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: clamp(0.6rem, 2vw, 0.75rem);
+            color: #b89a6e;
+        }
+
+        /* إطار الصورة */
+        .photo-frame {
+            border: 2px dashed #d4af7a;
+            border-radius: 15px;
+            padding: 8px;
+            text-align: center;
+            margin: 10px 0;
+            background: #fdf5e6;
+        }
+        .photo-frame img {
+            max-width: 100%;
+            max-height: clamp(100px, 25vh, 150px);
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        .photo-frame input {
+            margin-top: 8px;
+            font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+            width: 100%;
+        }
+
+        /* الشموع */
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 4vw, 20px);
+            margin: 15px 0;
+        }
+        .candle {
+            width: clamp(25px, 8vw, 40px);
+            height: clamp(50px, 15vw, 80px);
+            background: #f5c6a0;
+            border-radius: 10px 10px 5px 5px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .candle::before {
+            content: "🕯️";
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(18px, 5vw, 25px);
+            opacity: 0.8;
+        }
+        .candle.lit::before {
+            content: "🔥";
+        }
+
+        /* باقة الورد */
+        .bouquet {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+            justify-content: center;
+            min-height: 60px;
+        }
+        .flower {
+            font-size: clamp(20px, 7vw, 28px);
+            cursor: pointer;
+        }
+
+        /* دفتر الملاحظات */
+        .note-pad {
+            background: #fff8e7;
+            border-radius: 12px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .note-pad textarea {
+            width: 100%;
+            background: #fffef5;
+            border: 1px solid #d4af7a;
+            border-radius: 10px;
+            padding: 8px;
+            font-family: inherit;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            resize: vertical;
+        }
+
+        /* فقاعات الكلام */
+        .speech-bubble {
+            position: fixed;
+            background: white;
+            color: #8b5a2b;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: clamp(0.75rem, 3vw, 0.95rem);
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: floatUp 3s ease forwards;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        @media (max-width: 600px) {
+            .speech-bubble {
+                white-space: normal;
+                max-width: 80%;
+                text-align: center;
+            }
+        }
+
+        /* الكرة البلورية */
+        .crystal-ball {
+            background: radial-gradient(circle at 30% 30%, #a888c4, #4a2f6d);
+            width: clamp(80px, 25vw, 120px);
+            height: clamp(80px, 25vw, 120px);
+            border-radius: 50%;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: clamp(2rem, 8vw, 3rem);
+        }
+
+        .fortune-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            min-height: 60px;
+        }
+
+        /* الزهور المتساقطة */
+        .petal {
+            position: fixed;
+            top: -20px;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: clamp(16px, 5vw, 25px);
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(0) scale(0.8); }
+            20% { opacity: 1; transform: translateY(-20px) scale(1); }
+            100% { opacity: 0; transform: translateY(-150px) scale(0.5); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* تحسينات إضافية للجوال */
+        @media (max-width: 768px) {
+            .page {
+                padding: 15px 12px;
+            }
+            .greeting, .poem {
+                margin: 8px 0;
+            }
+            .top-bar button, .controls button {
+                padding: 6px 12px;
+            }
+        }
+
+        /* تحسين للشاشات الأفقية على الجوال */
+        @media (max-width: 900px) and (orientation: landscape) {
+            :root {
+                --book-height: 80vh;
+            }
+            .page {
+                padding: 10px 12px;
+            }
+            h1 {
+                margin-bottom: 8px;
+            }
+        }
+
+        /* لأجهزة iPad الكبيرة */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            :root {
+                --book-height: 65vh;
+            }
+        }
+
+        .error-msg {
+            color: #c0392b;
+            margin-top: 10px;
+            font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+            min-height: 40px;
+        }
+        .hint {
+            margin-top: 15px;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            color: #b89a6e;
+            border-top: 1px solid #e0d6c0;
+            padding-top: 12px;
+        }
+        .signature {
+            margin-top: auto;
+            text-align: center;
+            font-size: var(--font-size-base);
+            font-family: cursive;
+            color: #a57c4c;
+        }
+    </style>
 </head>
 <body>
-<div class="blob"></div>
-<div id="lockScreen">
-  <div class="lockCard">
-    <h2 style="color:var(--rose); margin-bottom:10px">عالم زينب</h2>
-    <p style="margin-bottom:20px; color:#666">أدخلي الرمز السري</p>
-    <input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
-    <button class="btn-heart" onclick="unlock()" style="width:100%">دخول ✨</button>
-    <div id="lockMsg" style="margin-top:15px; color:red; font-size:0.9rem"></div>
-  </div>
+
+<!-- شاشة القفل -->
+<div class="lock-screen" id="lockScreen">
+    <div class="lock-card">
+        <div class="lock-icon">🔒📖</div>
+        <h1>كتاب الحب</h1>
+        <p style="color: #5a3e1b; margin-bottom: 10px;">إلى زينب 🌹</p>
+        <p style="font-size: clamp(0.7rem, 2.5vw, 0.85rem); color: #7a5a3a;">أدخل الرقم السري لفتح الكتاب</p>
+        <input type="password" id="secretCode" maxlength="4" placeholder="____" inputmode="numeric" pattern="[0-9]*">
+        <button id="unlockBtn">🔓 فتح الكتاب</button>
+        <div class="error-msg" id="errorMsg"></div>
+        <div class="hint">
+            💌 تلميح: سنة خاصة في قلب زوجك (4 أرقام)
+        </div>
+    </div>
 </div>
-<div id="moon" onclick="toggleNight()"><div id="moonShadow"></div><div id="moonWhisper">أحبك</div></div>
-<div class="world">
-  <h1>عالم زينب</h1>
-  <div id="loveMessage"></div>
-  <div class="actions">
-    <button class="btn-heart" onclick="nextLove()">نبضة حب ✨</button>
-    <button class="btn-whisper" onclick="forceWhisper()">همسة القمر 🌙</button>
-    <button class="btn-music" onclick="toggleMusic()">موسيقى العالم 🎵</button>
-  </div>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content" id="mainContent">
+<div class="book-container">
+    <div class="top-bar">
+        <button id="musicToggleBtn">🎵 تشغيل الموسيقى</button>
+        <button id="nightModeBtn">🌙 الوضع الليلي</button>
+        <button id="surpriseBtn">💌 مفاجأة</button>
+        <button id="startPetalsBtn">🌸 زهور متساقطة</button>
+        <button id="voiceRecordBtn">🎤 تسجيل صوتي</button>
+    </div>
+
+    <div class="book" id="book">
+        <div class="page page-left" id="leftPage"></div>
+        <div class="page page-right" id="rightPage"></div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn">➡️ السابقة</button>
+        <button id="nextBtn">التالي ⬅️</button>
+    </div>
+    <p style="text-align: center; color: #e9dbbd; margin-top: 10px; font-size: clamp(0.6rem, 2.5vw, 0.75rem);">✨ اضغط على الأزرار أو حواف الصفحات لقلب صفحات الحب ✨</p>
 </div>
-<audio id="music" loop><source src="https://pixabay.com"></audio>
-<audio id="snd-heart" src="https://mixkit.co"></audio>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-// --- الإعدادات ---
-const SECRET_CODE = "1989"; // الرقم السري هنا
-let messageIndex = Math.floor(Math.random() * 500);
-
-const part1 = ["زينب،", "يا أميرتي،", "في كل يوم،", "بكل نبضة،", "يا حلمي،", "يا رفيقة دربي،", "أنتِ الضياء،", "في قلبي مكانكِ،", "يا عمري الجميل،", "يا كلي،"];
-const part2 = ["أنتِ الحياة،", "يزهر العالم بكِ،", "حبكِ كنز لا ينتهي،", "أجد فيكِ الأمان،", "وجودكِ هو النور،", "أنتِ سر سعادتي،", "لا معنى للأيام بدونكِ،", "نبضي ينطق باسمكِ،", "أنتِ المبتدأ والخبر،", "تكتمل أيامي معكِ،"];
-const part3 = ["دائماً وأبداً.", "يا أغلى البشر.", "لأجلكِ أنتِ فقط.", "مهما طال الزمان.", "بكل حب، علاء.", "أحبكِ جداً.", "يا زينب الروح.", "يا نصفي الآخر.", "والقمر يشهد.", "يا سكن القلب."];
-
-function unlock() {
-    const val = document.getElementById("pinInput").value;
-    if(val === SECRET_CODE) {
-        document.getElementById("lockScreen").style.opacity = "0";
-        document.getElementById("music").play().catch(()=>{});
-        setTimeout(()=> document.getElementById("lockScreen").style.display="none", 1000);
-    } else {
-        document.getElementById("lockMsg").innerText = "الرمز غير صحيح 💗 يابطه";
-        document.getElementById("pinInput").value = "";
-    }
-}
-
-function nextLove() {
-    messageIndex++;
-    const p1 = part1[messageIndex % part1.length];
-    const p2 = part2[(messageIndex + 3) % part2.length];
-    const p3 = part3[(messageIndex * 7) % part3.length];
-    document.getElementById("loveMessage").innerHTML = `<b>${p1}</b><br>${p2}<br><i>${p3}</i><br><small style="opacity:0.5; font-size:0.7rem">💗علاء💗</small>`;
-    document.getElementById("snd-heart").play().catch(()=>{});
-}
-
-function forceWhisper() {
-    const w = document.getElementById("moonWhisper");
-    const phrases = ["زينب هي الحياة", "أحبكِ للأبد", "يا نبض علاء", "يا قمر ليلي", "جميلة الجميلات"];
-    w.innerText = phrases[messageIndex % phrases.length];
-    w.style.opacity = "1";
-    setTimeout(()=> w.style.opacity="0", 4000);
-}
-
-function toggleNight() {
-    document.body.classList.toggle("night");
-    if(document.body.classList.contains("night")) generateStars();
-}
-
-function generateStars() {
-    if(document.querySelector(".star")) return;
-    for(let i=0; i<60; i++) {
-        const s = document.createElement("div");
-        s.className = "star";
-        s.style.width = s.style.height = Math.random()*2+1+"px";
-        s.style.left = Math.random()*100+"vw";
-        s.style.top = Math.random()*100+"vh";
-        document.body.appendChild(s);
-    }
-}
-
-function toggleMusic() {
-    const m = document.getElementById("music");
-    m.paused ? m.play() : m.pause();
-}
-
-document.addEventListener("click", e => {
-    if(document.getElementById("lockScreen").style.display === "none") {
-        for(let i=0; i<5; i++) {
-            const h = document.createElement("div");
-            h.className = "heart"; h.innerText = "❤️";
-            h.style.setProperty('--x', (Math.random()-0.5)*150+"px");
-            h.style.left = e.clientX+"px"; h.style.top = e.clientY+"px";
-            document.body.appendChild(h);
-            setTimeout(()=> h.remove(), 2500);
+    // الرقم السري
+    const SECRET_CODE = "1989";
+    const lockScreen = document.getElementById('lockScreen');
+    const mainContent = document.getElementById('mainContent');
+    const secretInput = document.getElementById('secretCode');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    
+    function unlockBook() {
+        if (secretInput.value === SECRET_CODE) {
+            lockScreen.style.opacity = '0';
+            setTimeout(() => {
+                lockScreen.style.display = 'none';
+                mainContent.classList.add('visible');
+                for(let i=0; i<30; i++) {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.innerHTML = ['🎉','💖','🌹','🔓','✨','💕'][Math.floor(Math.random()*6)];
+                    petal.style.left = Math.random() * 100 + '%';
+                    petal.style.animationDuration = 2 + Math.random() * 3 + 's';
+                    petal.style.fontSize = 20 + Math.random() * 20 + 'px';
+                    document.body.appendChild(petal);
+                    setTimeout(() => petal.remove(), 5000);
+                }
+            }, 300);
+        } else {
+            errorMsg.innerHTML = '❌ الرقم السري غير صحيح... حاولي مرة أخرى 💔';
+            secretInput.value = '';
         }
     }
-});
+    
+    unlockBtn.addEventListener('click', unlockBook);
+    secretInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') unlockBook(); });
+    secretInput.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4); });
+    
+    // باقي كود الكتاب
+    const book = document.getElementById('book');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-nextLove();
+    const pagesContent = [
+        `<div class="page-content"><div style="text-align:center; margin-top:15%;"><h1>زينب 🌹💖</h1><div class="poem">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا" 🤍</div><div class="greeting">إلى نور بيتي ✨ وبهجة عمري 😊<br>يا من تسكنين قلبي قبل بيتي 🏠❤️</div><div class="signature">♥ زوجك للأبد ♥</div></div><div class="page-number">📖 1</div></div>`,
+        `<div class="page-content"><h1>✨ ذكرى لقائنا ✨</h1><div class="greeting">أتذكر أول مرة رأيتكِ فيها؟ 🌸 ابتسامتكِ أضاءت الطريق 💫 أيقنتُ أنني وجدت ما أبحث عنه 🥹💕</div><div class="poem">قالت الدنيا: "هذه زينب" 💃<br>فقلت: هذه جنتي 🌷</div><div class="greeting">أنتِ أغلى هدية 🎁✨</div><div class="page-number">📖 2</div></div>`,
+        `<div class="page-content"><h1>💗 صفاتكِ 💗</h1><div class="greeting">أحب فيكِ حلمكِ وطموحكِ وحنانكِ 🌹 ضحكتكِ تداوي جراحي 😊</div><div class="poem">عيناكِ بحران عميقان 🌊 أغوص فيهما لأجد نفسي 🤍</div><div class="page-number">📖 3</div></div>`,
+        `<div class="page-content"><h1>💕 حب لا يوصف 💕</h1><div class="greeting">لو كتبت بحور الدنيا حبراً 🌊 لن أستطيع وصف حبكِ 📖</div><div class="poem">زينب.. أنتِ معجزتي 🌟 ونبضي الذي لا يتوقف 💓</div><div class="greeting">أحبكِ حباً لو سئل عنه البحر لقال: لا يحيط به كلام 😊</div><div class="page-number">📖 4</div></div>`,
+        `<div class="page-content"><h1>📸 لحظات جميلة 📸</h1><div class="greeting">كل صباح معكِ ☕ وكل سهرة معكِ 🥰 أسعد أيامي هي التي أراكِ فيها سعيدة 😊</div><div class="photo-frame"><img id="uploadedImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0e4d0'/%3E%3Ctext x='20' y='55' fill='%238b5a2b' font-size='12'%3E📸 صورتك%3C/text%3E%3C/svg%3E" style="max-width:100%; border-radius:12px;"><br><input type="file" id="photoUpload" accept="image/*" style="margin-top:8px"></div><div class="page-number">📖 5</div></div>`,
+        `<div class="page-content"><h1>🙏 شكراً لكِ 🙏</h1><div class="greeting">شكراً لأنكِ رفيقة طريقي 🌹 شكراً لكل قهوة قدمتِها ☕</div><div class="poem">لو كان العمر أوراقاً 📄 لكنت أكتب اسمكِ في كل ورقة ✍️💕</div><div class="note-pad"><strong>📝 رسالة سريعة:</strong><br><textarea id="secretNote" rows="2" placeholder="اكتبي شيئاً... سيتم حفظه تلقائياً 💌"></textarea></div><div class="page-number">📖 6</div></div>`,
+        `<div class="page-content"><h1>🤲 دعائي لكِ 🤲</h1><div class="greeting">أسأل الله أن يحميكِ 🛡️ ويسعدكِ 🎉</div><div class="poem">اللهم إني أحببت زينب فيك 🤲 فاحفظها لي بحفظك 🤍</div><div class="candles" id="candlesArea"><div class="candle" data-lit="false"></div><div class="candle" data-lit="false"></div><div class="candle" data-lit="false"></div></div><div class="page-number">📖 7</div></div>`,
+        `<div class="page-content"><h1>💍 وعد لا ينتهي 💍</h1><div class="greeting">سأظل أحبكِ حتى آخر نفس 🌹</div><div class="bouquet" id="bouquetArea"></div><div><button id="addFlowerBtn">🌹 أضف وردة للباقة</button></div><div class="greeting" style="font-size:1.5rem; text-align:center;">💖🥀💖🥀💖</div><div class="page-number">📖 8 الخاتمة</div></div>`,
+        `<div class="page-content"><h1>🔮 كرة الحب السحرية 🔮</h1><div class="greeting">انقري على الكرة لتحصلي على رسالة حب عشوائية من قلب زوجك 💕</div><div class="crystal-ball" id="crystalBall">🔮</div><div class="fortune-text" id="fortuneText">✨ انتظري المفاجأة ✨</div><div class="greeting" style="margin-top:15px; text-align:center;">كل نقرة تحمل رسالة جديدة من قلبي لكِ ❤️</div><div class="page-number">📖 9 الكرة السحرية</div></div>`
+    ];
+
+    let currentPage = 1;
+    const totalPairs = pagesContent.length / 2;
+
+    function updateBook() {
+        const leftIndex = (currentPage - 1) * 2;
+        const rightIndex = leftIndex + 1;
+        if (leftIndex >= 0 && leftIndex < pagesContent.length) document.getElementById('leftPage').innerHTML = pagesContent[leftIndex];
+        if (rightIndex >= 0 && rightIndex < pagesContent.length) document.getElementById('rightPage').innerHTML = pagesContent[rightIndex];
+        book.classList.remove('flipped');
+        reattachDynamicElements();
+    }
+
+    function reattachDynamicElements() {
+        const photoInput = document.getElementById('photoUpload');
+        if (photoInput) photoInput.onchange = (e) => { if(e.target.files[0]) { const img = document.getElementById('uploadedImg'); img.src = URL.createObjectURL(e.target.files[0]); } };
+        
+        const noteArea = document.getElementById('secretNote');
+        if(noteArea) { noteArea.value = localStorage.getItem('zainabNote') || ''; noteArea.oninput = () => localStorage.setItem('zainabNote', noteArea.value); }
+        
+        document.querySelectorAll('.candle').forEach(c => { c.onclick = () => c.classList.toggle('lit'); });
+        
+        const bouquet = document.getElementById('bouquetArea');
+        const addBtn = document.getElementById('addFlowerBtn');
+        if(bouquet && addBtn) {
+            let flowers = JSON.parse(localStorage.getItem('flowerBouquet')) || ['🌹','🌷','🌸'];
+            function renderBouquet() { bouquet.innerHTML = flowers.map(f => `<span class="flower">${f}</span>`).join(''); }
+            renderBouquet();
+            addBtn.onclick = () => { flowers.push('🌹'); localStorage.setItem('flowerBouquet', JSON.stringify(flowers)); renderBouquet(); };
+        }
+        
+        const ball = document.getElementById('crystalBall');
+        const fortuneDiv = document.getElementById('fortuneText');
+        if(ball && fortuneDiv) {
+            const fortunes = ["💖 زينب، أنتِ حب عمري كله 💖","🌹 كل يوم أكتشف سبباً جديداً لحبكِ 🌹","✨ وجودكِ في حياتي هو أعظم هدية ✨","😊 ابتسامتكِ تضيء عالمي كله 😊","💕 أحبكِ أكثر من الكلمات 💕","🌟 أنتِ نجمتي التي تهتدي بها 🌟","🌸 أنتِ ربيع عمري ودفء شتائي 🌸"];
+            ball.onclick = () => { fortuneDiv.innerHTML = `✨ "${fortunes[Math.floor(Math.random() * fortunes.length)]}" ✨`; };
+        }
+    }
+
+    function nextPage() { if (currentPage < totalPairs) { book.classList.add('flipped'); setTimeout(() => { currentPage++; updateBook(); book.classList.remove('flipped'); }, 400); } }
+    function prevPage() { if (currentPage > 1) { book.classList.add('flipped'); setTimeout(() => { currentPage--; updateBook(); book.classList.remove('flipped'); }, 400); } }
+
+    nextBtn.addEventListener('click', nextPage);
+    prevBtn.addEventListener('click', prevPage);
+    updateBook();
+
+    // فقاعات الكلام
+    setInterval(() => {
+        const msgs = ["💕 أحبك زينب", "🌹 أنتي جميلة", "😊 ابتسامتك نور", "💖 أنتي حياتي", "✨ أفتقدك", "🌸 وجودك سعادة"];
+        const bubble = document.createElement('div');
+        bubble.className = 'speech-bubble';
+        bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        bubble.style.left = Math.random() * 80 + 10 + '%';
+        bubble.style.top = Math.random() * 60 + 20 + '%';
+        document.body.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 2800);
+    }, 6000);
+
+    // باقي الأزرار
+    const music = document.getElementById('bgMusic');
+    let musicPlaying = false;
+    document.getElementById('musicToggleBtn').onclick = () => { if(musicPlaying) { music.pause(); musicToggleBtn.innerHTML = '🎵 تشغيل الموسيقى'; } else { music.play(); musicToggleBtn.innerHTML = '🔇 إيقاف'; } musicPlaying = !musicPlaying; };
+    document.getElementById('surpriseBtn').onclick = () => alert('💌 مفاجأة! 💌\n\nزينب، أنتِ أجمل هدية في حياتي ❤️🌹');
+    document.getElementById('startPetalsBtn').onclick = () => { for(let i=0;i<30;i++) { const p = document.createElement('div'); p.className = 'petal'; p.innerHTML = ['🌸','🌼','🌻','💖'][Math.floor(Math.random()*4)]; p.style.left = Math.random() * 100 + '%'; p.style.animationDuration = 3 + Math.random() * 4 + 's'; p.style.fontSize = 15 + Math.random() * 20 + 'px'; document.body.appendChild(p); setTimeout(() => p.remove(), 6000); } };
+    
+    let night = false;
+    document.getElementById('nightModeBtn').onclick = () => { document.body.classList.toggle('night-mode'); night = !night; nightModeBtn.innerHTML = night ? '☀️ النهاري' : '🌙 الليلي'; };
+    
+    // تسجيل صوتي
+    let mediaRecorder, chunks = [], recording = false;
+    document.getElementById('voiceRecordBtn').onclick = async () => {
+        if(!recording) {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                chunks = [];
+                mediaRecorder.ondataavailable = e => chunks.push(e.data);
+                mediaRecorder.onstop = () => { const audio = new Audio(URL.createObjectURL(new Blob(chunks))); audio.play(); alert('🎤 تم التسجيل!'); stream.getTracks().forEach(t => t.stop()); };
+                mediaRecorder.start();
+                recording = true;
+                voiceRecordBtn.innerHTML = '⏹️ إيقاف';
+                setTimeout(() => { if(recording) { mediaRecorder.stop(); recording = false; voiceRecordBtn.innerHTML = '🎤 تسجيل'; } }, 5000);
+            } catch(e) { alert('❌ يرجى السماح بالميكروفون'); }
+        } else { mediaRecorder.stop(); recording = false; voiceRecordBtn.innerHTML = '🎤 تسجيل'; }
+    };
 </script>
 </body>
 </html>
