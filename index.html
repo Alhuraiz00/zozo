@@ -793,6 +793,17 @@
             } catch(e) { alert('❌ يرجى السماح بالميكروفون'); }
         } else { mediaRecorder.stop(); recording = false; voiceRecordBtn.innerHTML = '🎤 تسجيل'; }
     };
+    // فتح الرابط عند الضغط على أيقونة الكتاب
+const bookIcon = document.getElementById('bookIcon');
+
+if (bookIcon) {
+    bookIcon.addEventListener('click', () => {
+        window.open(
+            'https://alhuraiz00.github.io/Zainab_notebook/',
+            '_blank'
+        );
+    });
+}
 </script>
 </body>
 </html>
